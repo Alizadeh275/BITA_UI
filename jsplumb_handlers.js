@@ -178,10 +178,12 @@ function update_controll_color(control_id, color) {
 // function that checks current connection is valid or not
 function check_connection(source_node, target_node) {
 
-    if (source_node == 'Import_Collection' &&
-        (target_node == 'Tokenization')) {
+    if (source_node == 'File_Import' &&
+        (target_node == 'Decision_Tree')) {
         return true;
     } else if (source_node == 'Tokenization' && (target_node != 'Tokenization') && (target_node != 'Graph_Viewer')) {
+        return true;
+    } else if (source_node == 'Decision_Tree' && (target_node == 'Table_View')) {
         return true;
     } else if (source_node == 'Stemming' && (target_node == 'Export_File' || target_node == 'Stopword_Removal' || target_node == 'Doc_Statistics')) {
         return true;
@@ -385,7 +387,7 @@ function send_request(formData, url, form_id, form_class) {
         $(table_selector).children().remove();
         $.each(res, function(index, value) {
             if (index > 0) {
-                if (form_class == 'import_collection') {
+                if (form_class == 'file_import') {
                     $(table_selector).append('<tr>' + '<th scope = "row" class="col-1">' + index + '</th>' + '<td class="col-4">' + value.name + '</td>' + '<td class="col-4">' + value.text + '</td>' + '<td class="col-3">' + String(Math.round(Number(value.size) / 1000)) + '</td>' + '</tr>');
 
                 } else if (form_class == 'tokenization') {
@@ -416,7 +418,7 @@ function send_request(formData, url, form_id, form_class) {
                 if (typeof(value.output_path) != 'undefined') {
                     current_address = value.output_path;
                 }
-                if (form_class == 'import_collection') {
+                if (form_class == 'file_import') {
                     current_address = value.file_name;
                 }
                 update_meta_data(form_selector, value.file_name, 'default', 'default', 'default', current_address, 'default', '');
@@ -701,7 +703,7 @@ instance.bind("ready", function() {
             // alert(s);
 
             /*------ setting endpoint of each dropped node -----------*/
-            if (draggable_element_id.includes('Import')) {
+            if (draggable_element_id.includes('File_Import')) {
                 instance.addEndpoint(node_id, {
                     endpoint: "Dot",
                     anchor: ["RightMiddle"],
@@ -709,7 +711,7 @@ instance.bind("ready", function() {
                     connectionType: "gray-connection",
                     maxConnections: 10
                 });
-            } else if (draggable_element_id.includes('Export') || draggable_element_id.includes('Graph_Viewer')) {
+            } else if (draggable_element_id.includes('Table_View') || draggable_element_id.includes('Graph_Viewer')) {
                 instance.addEndpoint(node_id, {
                     endpoint: "Dot",
                     anchor: ["LeftMiddle"],
@@ -824,14 +826,14 @@ instance.bind("ready", function() {
 
         form_id = $(this).closest('form').attr('id');
         form_class = $(this).closest('form').attr('class').split(' ').pop();;
-        temp = ['export_file', 'import_collection', 'graph_viewer'];
+        temp = ['export_file', 'file_import', 'graph_viewer'];
 
         if (!temp.includes(form_class)) {
 
             basic_running(form_id, form_class);
 
             // import collection running
-        } else if (form_class == 'import_collection') {
+        } else if (form_class == 'file_import') {
 
 
             // chceck duplicate connection at binding
@@ -878,7 +880,7 @@ instance.bind("ready", function() {
                 formData.append('file', file_uploader.files[0]);
                 url = host + 'api/import/';
                 // alert(file_uploader[0].files[0]);
-                send_request(formData, url, form_id, 'import_collection');
+                send_request(formData, url, form_id, 'file_import');
             }
 
         } else if (form_class == 'export_file') {

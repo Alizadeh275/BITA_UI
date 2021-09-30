@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Teenat</title>
+    <title>BITA</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -137,18 +137,26 @@
         <div class="row">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-0 py-0">
-                <a class="navbar-brand text-info" style="  font-family: 'Brush Script MT', cursive;" href="#">Teenat</a>
+                <a class="navbar-brand text-info" style="  font-family: Verdana;" href="#">BITA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse py-0" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link disabled " href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link disabled " href="#">File <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled " href="#">File</a>
+                            <a class="nav-link disabled " href="#">Edit</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Window</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">View</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">Help</a>
                         </li>
@@ -161,21 +169,27 @@
             <div class="col-md-2 p-1 pt-0 mt-0">
                 <div id="toolbox" class="p-0 justify-content-center mt-0" style="overflow: scroll;">
                     <p class="text-secondary bg-light font-weight-bolder w-100 m-0 p-1" style="position: sticky; top: 0; z-index: 1;font-size: 12px;">Nodes</p>
-                    <div class="p-1 w-100 text-light bg-info"> Import/Export Data</div>
-                    <div id='Import_Collection' class="control import border-secondary"><i class="bi bi-file-earmark-zip-fill text-secondary"></i> Import Collection</div>
+                    <div class="p-1 w-100 text-light bg-info"> Source</div>
+                    <div id='File_Import' class="control import border-secondary"><i class="bi bi-file-earmark-arrow-down-fill text-secondary mr-2"></i> File Import</div>
                     <!-- <div id='Import_Document' class="control import border-secondary"><i class="bi bi-file-text-fill mr-0 text-secondary"></i> Import Document</div> -->
-                    <div id='Export_File' class="control export border-secondary"><i class="bi bi-file-earmark-arrow-up-fill mr-0 text-secondary"></i> Export File</div>
+                    <div id='Export_File' class="control export border-secondary"> DB Table Import</div>
 
-                    <div class="p-1 w-100 text-light bg-info"> Basic Analysis</div>
-                    <div id='Tokenization' class="control basic border-secondary"><i class="bi bi-funnel-fill text-secondary"></i> Tokenization</div>
-                    <div id='Stopword_Removal' class="control basic border-secondary"><i class="bi bi-eraser-fill text-secondary"></i> STW Removal</div>
-                    <div id='TF_IDF' class="control basic border-secondary"><i class="bi bi-table text-secondary "></i> TF-IDF Weight</div>
-                    <div id='Stemming' class="control basic border-secondary"><i class="bi bi-snow2 text-secondary font-weight-bolder pr-2"></i> Stemming</div>
-                    <div id='Doc_Statistics' class="control basic border-secondary"><i class="fa fa-line-chart text-secondary font-weight-bolder pr-2"></i> Doc Statistics</div>
 
-                    <div class="p-1 w-100 text-light  bg-info"> Graph Analysis</div>
-                    <div id='Graph_Construction' style=" white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="control border-secondary"><i class="bi bi-diagram-3-fill text-secondary"></i> Graph <span style="font-size: 12px;">Construction</span></div>
-                    <div id='Graph_Viewer' class="control border-secondary"><i class="bi bi-easel-fill text-secondary"></i> Graph Viewer</div>
+
+                    <div class="p-1 w-100 text-light bg-info"> Analytical Flow</div>
+                    <div id='Decision_Tree' class="control basic border-secondary"><i class="bi bi-diagram-3-fill text-secondary mr-2"></i> Decision Tree</div>
+                    <div id='Tokenization' class="control basic border-secondary"> Outlier Detection</div>
+
+                    <div class="p-1 w-100 text-light bg-info"> Technical Flow</div>
+                    <div id='Tokenization' class="control basic border-secondary"> Join</div>
+                    <div id='Stopword_Removal' class="control basic border-secondary"> SQL Query</div>
+                    <div id='TF_IDF' class="control basic border-secondary"> Schema</div>
+
+
+
+                    <div class="p-1 w-100 text-light  bg-info"> Sink</div>
+                    <div id='Table_View' style=" white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="control border-secondary"><i class="bi bi-table text-secondary mr-2"></i> Table View</div>
+                    <div id='Graph_Viewer' class="control border-secondary"> Graph View</div>
 
 
                 </div>
@@ -230,13 +244,13 @@
 
 
                     <!-- table -->
-                    <table id="Import_Collection" class="table table-bordered d-none table-hover">
+                    <table id="File_Import" class="table table-bordered d-none table-hover">
                         <thead class="thead-info" style="background-color:#17a2b8;position: sticky; top: 0; z-index: 1;">
                             <tr class="text-light">
                                 <th scope="col">#</th>
-                                <th scope="col">Document Name</th>
-                                <th scope="col">Document Text (1th line)</th>
-                                <th scope="col">Document Size (KB)</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Is_Fraud</th>
                             </tr>
 
                         </thead>
@@ -251,13 +265,14 @@
                         </tbody>
                     </table>
 
-                    <table id="Tokenization" class="table table-bordered table-hover d-none">
+                    <table id="Decision_Tree" class="table table-bordered table-hover d-none">
                         <thead class="thead-info" style="background-color:#17a2b8;position: sticky; top: 0; z-index: 1;">
                             <tr class="text-light">
                                 <th scope="col">#</th>
-                                <th scope="col">Document Name</th>
-                                <th scope="col"> First 10 Tokens</th>
-                                <th scope="col"> Tokens Count</th>
+                                <th scope="col">Type</th>
+                                <th scope="col"> Amount</th>
+                                <th scope="col"> _Probability_</th>
+                                <th scope="col"> _Prediction_</th>
                                 <!-- <th scope="col">Term Frequency</th> -->
                             </tr>
                         </thead>
@@ -408,10 +423,10 @@
                 <div class="right_toolbox p-0 justify-content-center mt-0" id="toolbox" style="overflow: scroll;">
 
                     <!-- Import Collection -->
-                    <form class="my-form-control d-none import_collection" id="Import_Collection">
+                    <form class="my-form-control d-none file_import" id="File_Import">
                         <div id="Info_segment" class="bg-light w-100 p-0 m-0" style="position: sticky; top: 0; z-index: 4;">
                             <p class="text-secondary bg-light font-weight-bolder w-100 m-0 p-1" style="font-size: 12px;">Info</p>
-                            <h3 class="bg-light w-100 m-0 p-2">Import Collection</h3>
+                            <h3 class="bg-light w-100 m-0 p-2">File Import</h3>
                             <button type="button" class="btn btn-success my-2  w-100"><i
                                     class="bi bi-play-circle-fill"></i>
                                 <p class="d-inline" style="font-size: 22px;;">Run</p>
@@ -423,13 +438,13 @@
                         <div class="form-group px-1">
 
                             <div class="input-group pt-2">
-                                <label class="d-block w-100">Collection Path:</label>
+                                <label class="d-block w-100">File Path:</label>
                                 <label class="input-group-btn">
                                     <span id="file-btn" class="btn btn-outline-info rounded-0">
                                         <!-- &hellip; -->
                                         <i class="bi bi-folder-fill" style="font-size: 15px;"></i> <input
                                             id="FilUploader" class="FilUploader" type="file" style="display: none;"
-                                            accept=".rar .zip .7z">
+                                            accept=".csv .xlsx">
                                     </span>
                                 </label>
                                 <input id="text-input" type="text" class="form-control border-left-0 border-info" readonly>
@@ -478,7 +493,7 @@
                                         state_selector = '#' + form_id.concat(' .state');
                                         tip_selector = '#' + form_id.concat(' .tip');
 
-                                        var fileExtension = ['zip', 'rar', '7z'];
+                                        var fileExtension = ['csv', 'xlsx'];
                                         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
                                             alert("Only formats are allowed : " + fileExtension.join(', '));
                                             $(this).val(null);
@@ -552,41 +567,36 @@
                                 <input class="form-check-input float-right ml-2" style="width: 18px; height: 18px;" type="checkbox" value="" id="flexCheckChecked">
                             </div> -->
 
+
+                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Delimiter:</label>
+                            <select id="delimiter" class="pl-0 form-control">
+                                <option value=".tab" selected>tab</option>
+                                <option value=".comma">comma</option>
+                                <option value=".space">space</option>
+                            </select>
+
+
+
+
                         </div>
+
                         <div class="p-1 w-100 text-light bg-info">Node Meta Data</div>
                         <div class="container-fluid meta-data">
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Node:</label>
+                                <label class="text-secondary w-100">State:</label>
                                 <p class=" mb-1 source_node" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source ID:</label>
+                                <label class="text-secondary w-100">File Name:</label>
                                 <p class=" mb-1 source_id" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Collection:</label>
+                                <label class="text-secondary w-100"># instances:</label>
                                 <p class=" mb-1 source_collection" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
-
-
-                            <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Address:</label>
-                                <p class=" mb-1 source_address" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"></p>
-                            </div>
-
-                            <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Current Address:</label>
-                                <p class=" mb-1 current_address" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
-                            </div>
-
-                            <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">State:</label>
-                                <p class=" mb-1 state">Created</p>
-                            </div>
-
 
 
                             <div class="row mt-1 border-bottom px-1">
@@ -605,10 +615,10 @@
 
                     <!-- Tokenization Form -->
 
-                    <form class="my-form-control d-none w-100 tokenization" id="Tokenization">
+                    <form class="my-form-control d-none w-100 decision_tree" id="Decision_Tree">
                         <div id="Info_segment" class="bg-light w-100 p-0 m-0" style="position: sticky; top: 0; z-index: 4;">
                             <p class="text-secondary bg-light font-weight-bolder w-100 m-0 p-1" style="font-size: 12px;">Info</p>
-                            <h3 class="bg-light w-100 m-0 p-2">Tokenization</h3>
+                            <h3 class="bg-light w-100 m-0 p-2">Decision Tree</h3>
                             <button type="button" class="btn btn-success my-2  w-100"><i
                                     class="bi bi-play-circle-fill"></i>
                                 <p class="d-inline" style="font-size: 22px;;">Run</p>
@@ -618,13 +628,39 @@
 
                         <div class="form-group px-1">
 
-                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Seperator:</label>
+                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Target Feature:</label>
                             <select id="seperator" class="form-control pl-0 mt-0">
-                                <option value=" " selected>space</option>
+                                <option value=" " selected>isfraud</option>
                                 <!-- <option>comma</option>
                                   <option>tab</option>
                                   <option disabled>special character</option> -->
                             </select>
+
+                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Max Depth:</label>
+                            <select id="seperator" class="form-control pl-0 mt-0">
+                                <option value=" " selected>5</option>
+                                <!-- <option>comma</option>
+                                  <option>tab</option>
+                                  <option disabled>special character</option> -->
+                            </select>
+
+                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Min Instance Per leaf:</label>
+                            <select id="seperator" class="form-control pl-0 mt-0">
+                                <option value=" " selected>4</option>
+                                <!-- <option>comma</option>
+                                  <option>tab</option>
+                                  <option disabled>special character</option> -->
+                            </select>
+
+                            <label for="formGroupExampleInput2" class="mb-1 mt-2">Training Data Rate:</label>
+                            <select id="seperator" class="form-control pl-0 mt-0">
+                                <option value=" " selected>0.8</option>
+                                <!-- <option>comma</option>
+                                  <option>tab</option>
+                                  <option disabled>special character</option> -->
+                            </select>
+
+
                             <!-- <div class="form-check mt-2 px-0">
                                 <label class="form-check-label" for="flexCheckChecked">
                                     Chekbox:
@@ -637,38 +673,38 @@
                         <div class="container-fluid meta-data">
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Node:</label>
+                                <label class="text-secondary w-100">State:</label>
                                 <p class=" mb-1 source_node" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source ID:</label>
+                                <label class="text-secondary w-100">Accuracy:</label>
                                 <p class=" mb-1 source_id" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Collection:</label>
+                                <label class="text-secondary w-100">F-Measure:</label>
                                 <p class=" mb-1 source_collection" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Source Address:</label>
+                                <label class="text-secondary w-100">Depth:</label>
                                 <p class=" mb-1 source_address" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Current Address:</label>
+                                <label class="text-secondary w-100"># Nodes:</label>
                                 <p class=" mb-1 current_address" style="  white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">State:</label>
-                                <p class=" mb-1 state">Created</p>
+                                <label class="text-secondary w-100"># Classes:</label>
+                                <p class=" mb-1 state"></p>
                             </div>
 
                             <div class="row mt-1 border-bottom px-1">
-                                <label class="text-secondary w-100">Tip:</label>
+                                <label class="text-secondary w-100"># Features:</label>
                                 <p class=" mb-1 tip"></p>
                             </div>
 
